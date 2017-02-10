@@ -1,0 +1,52 @@
+<form method="GET" action="#">
+  <ul class="collapsible " data-collapsible="expandable">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">filter_drama</i>
+        Conexão
+        <i id="connectionStatus" class="material-icons right">done</i>
+      </div>
+      <div class="collapsible-body">
+        <div class="row">
+          <div class="col s12">
+            <div class="input-field col s3">
+              <input id="broker" type="text" class="validate">
+              <label for="broker" class="active">Broker</label>
+            </div>
+            <div class="input-field col s3">
+              <input id="port" type="text" class="validate">
+              <label for="port" class="active">Port</label>
+            </div>
+            <div class="input-field col s3">
+              <input id="clientId" type="text" class="validate">
+              <label for="clientId" class="active">Client Id</label>
+            </div>
+            <div class="input-field col s3">
+              <input type="checkbox" id="isSSL" name="isSSL"/>
+              <label for="isSSL">SSL</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="username" type="text" class="validate">
+              <label for="username" class="active">Username</label>
+            </div>
+            <div class="input-field col s6">
+
+              <div class="col s6">
+                <input id="password" type="password" class="validate">
+                <label for="password" class="active">Password</label>
+              </div>
+
+              <button class="btn-floating blue" type="button" id="save" name="save">
+                <i class="material-icons">mode_edit</i>
+              </button>
+            </div>
+            <div class="input-field col s12">
+              <input class="btn red col s3" type="button" id="disconnect" name="disconnect" value="Desconectar"
+                     disabled>
+              <input class="btn green col s3 right" type="button" id="connect" name="connect" value="Conectar">
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</form>

@@ -1,0 +1,20 @@
+<div class="input-field col s8">
+  <input id="publishTopic" name="publishTopic" type="text" class="validate">
+  <label for="publishTopic" class="active">Topic</label>
+</div>
+<div class="input-field col s4">
+  <select id="qos">
+    <option value="0">0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+  </select>
+  <label for="qos">QoS</label>
+</div>
+<div class="input-field col s12">
+  <textarea id="publishMessage" class="materialize-textarea" length="120"></textarea>
+  <label for="publishMessage" class="active">Message</label>
+</div>
+<div class="input-field s4">
+  <input class="btn blue right" type="button" id="publish" name="publish"
+         value="Publicar" disabled>
+</div>
