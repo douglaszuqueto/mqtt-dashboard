@@ -1,57 +1,57 @@
 (function () {
 
   const defaultSettings = {
-    broker  : 'broker.iot-br.com',
-    port    : 8880,
+    broker: 'broker.iot-br.com',
+    port: 8880,
     username: null,
     password: null,
     clientId: "DZ",
-    isSSL   : false
+    isSSL: false
   };
 
   const connectionStatus = document.getElementById('connectionStatus');
 
-  const brokerInput   = document.getElementById('broker');
-  const portInput     = document.getElementById('port');
+  const brokerInput = document.getElementById('broker');
+  const portInput = document.getElementById('port');
   const clientIdInput = document.getElementById('clientId');
-  const isSSLInput    = document.getElementById('isSSL');
+  const isSSLInput = document.getElementById('isSSL');
   const usernameInput = document.getElementById('username');
   const passwordInput = document.getElementById('password');
 
-  const saveButton       = document.getElementById('save');
-  const connectButton    = document.getElementById('connect');
+  const saveButton = document.getElementById('save');
+  const connectButton = document.getElementById('connect');
   const disconnectButton = document.getElementById('disconnect');
 
-  const subscribeButton     = document.getElementById('subscribe');
-  const unsubscribeButton   = document.getElementsByClassName('unsubscribe');
+  const subscribeButton = document.getElementById('subscribe');
+  const unsubscribeButton = document.getElementsByClassName('unsubscribe');
   const subscribeTopicInput = document.getElementById('subscribeTopic');
 
-  const publishButton       = document.getElementById('publish');
+  const publishButton = document.getElementById('publish');
   const publishMessageInput = document.getElementById('publishMessage');
-  const publishTopicInput   = document.getElementById('publishTopic');
+  const publishTopicInput = document.getElementById('publishTopic');
 
   const messagesTbody = document.getElementById('messages');
 
   const loadSettings = () => {
-    if ( !JSON.parse(localStorage.getItem('mqtt')) ) {
+    if (!JSON.parse(localStorage.getItem('mqtt'))) {
       return;
     }
 
     let json = JSON.parse(localStorage.getItem('mqtt'));
 
-    defaultSettings.broker   = json.broker;
-    defaultSettings.port     = json.port;
+    defaultSettings.broker = json.broker;
+    defaultSettings.port = json.port;
     defaultSettings.username = json.username;
     defaultSettings.password = json.password;
     defaultSettings.clientId = json.clientId;
-    defaultSettings.isSSL    = json.isSSL;
+    defaultSettings.isSSL = json.isSSL;
   };
 
   loadSettings();
 
   const mqttOptions = {
-    host    : defaultSettings.broker,
-    port    : parseInt(defaultSettings.port),
+    host: defaultSettings.broker,
+    port: parseInt(defaultSettings.port),
     clientId: defaultSettings.clientId + String(Date.now())
   };
 
@@ -70,7 +70,7 @@
 
   };
 
-  let mqtt              = new Paho.MQTT.Client(mqttOptions.host, mqttOptions.port, mqttOptions.clientId);
+  let mqtt = new Paho.MQTT.Client(mqttOptions.host, mqttOptions.port, mqttOptions.clientId);
   mqtt.onConnectionLost = onConnectionLost;
   mqtt.onMessageArrived = onMessageArrived;
 
@@ -99,7 +99,7 @@
   const mqttConnect = () => {
 
     var options = {
-      timeout  : 3,
+      timeout: 3,
       onSuccess: onSuccess,
       onFailure: onFailure,
       // useSSL   : defaultSettings.isSSL
@@ -123,8 +123,8 @@
   };
 
   const loadForm = () => {
-    brokerInput.value   = defaultSettings.broker;
-    portInput.value     = defaultSettings.port;
+    brokerInput.value = defaultSettings.broker;
+    portInput.value = defaultSettings.port;
     usernameInput.value = defaultSettings.username;
     passwordInput.value = defaultSettings.password;
     clientIdInput.value = defaultSettings.clientId;
@@ -134,10 +134,10 @@
 
   const save = () => {
     localStorage.setItem("mqtt", JSON.stringify({
-      broker  : brokerInput.value,
-      port    : portInput.value,
+      broker: brokerInput.value,
+      port: portInput.value,
       clientId: clientIdInput.value,
-      isSSL   : isSSLInput.value,
+      isSSL: isSSLInput.value,
       username: usernameInput.value,
       password: passwordInput.value
     }));
@@ -148,14 +148,14 @@
   };
 
   const createMessage = (topic, message) => {
-    var publisher             = new Paho.MQTT.Message(message);
+    var publisher = new Paho.MQTT.Message(message);
     publisher.destinationName = topic;
     mqtt.send(publisher);
   };
 
   const publish = () => {
     let topic, message;
-    topic   = publishTopicInput.value;
+    topic = publishTopicInput.value;
     message = publishMessageInput.value;
 
     createMessage(topic, message);
